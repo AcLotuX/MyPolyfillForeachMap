@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        console.log("//-------------------FOREACH---------------------//")
+        
+        var array1 = [{ id:1,name:"One" },{ id:2,name:"Two" },{ id:3,name:"Three" }];
+        
+        Array.prototype.forEachPoll = function(callback,arg){
+            if(!typeof(callback) == "function"){ alert("This is not a function");}
+            //--------------------------
+            console.log("callback: " + callback);
+            console.log("arg: " + arg);
+            //--------------------------
+            var lenghtArr = this.length;
+            
+            for(var i=0;i<lenghtArr;i++)
+            {
+                callback.call(arg,this[i],i,this);
+            }
+        }
+        
+        array1.forEachPoll(function(a){
+            console.log("Code: " + a.id + " - Name: " + a.name);
+        });
+        
+        console.log("//---------------------MAP-----------------------//")
+        
+        Array.prototype.mapPoll = function(callback,arg){
+            if(!typeof(callback) == "function"){ alert("This is not a function");}
+            //--------------------------
+            console.log("callback: " + callback);
+            console.log("arg: " + arg);
+            //--------------------------
+            var lenghtArr = this.length;
+            var mapArray = [];
+            for(var i=0;i<lenghtArr;i++)
+            {
+                mapVal = callback.call(arg,this[i],i,this);
+                mapArray[i] = mapVal;
+            }
+            
+            return mapArray;
+        }
+        
+        var array2 = array1.mapPoll(function(a){
+                return a.id*4; 
+            }
+        );
+        
+        console.log(array2);
+        
+        
+    </script>
+    
+</head>
+<body>
+    
+</body>
+</html>
